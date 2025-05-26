@@ -1,0 +1,64 @@
+name: Test
+
+on:
+  pull_request:
+    types: [ assigned, edited, opened, ready_for_review, reopened, synchronize ]
+  workflow_dispatch:  # Go to [Actions] - select Test -> [Run workflow]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+          python-version: 3.12
+
+    - uses: pre-commit/action@v2.0.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR actions/checkout@v2
+        uses: actions/checkout@v2
+        if: github.event_name == 'pull_request'
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: PUSH actions/checkout@v2
+        uses: actions/checkout@v2
+        if: github.event_name == 'push'
+        with:
+          fetch-depth: 0
+
+      - name: PR actions/checkout@v2
+        uses: actions/checkout@v2
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.workflow_dispatch.head.ref }}
+
+      - uses: webfactory/ssh-agent@v0.4.1
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Setup Python
+        uses: actions/setup-python@master
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies with pipenv
+        run: |
+          pip install pipenv
+          pipenv sync --dev
+
+      - run: pipenv run pytest
+
+      - run: pipenv run pytest --cov --cov-fail-under=100 --cov-report term-missing:skip-covered

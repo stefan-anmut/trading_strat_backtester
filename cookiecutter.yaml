@@ -1,0 +1,10 @@
+default_context:
+  template: anmut-consulting/pipenv-cookiecutter.git
+  full_name: Stefan Davis
+  email: stef.mdavis96@gmail.com
+  project_name: Quantitative Trading Strategy Backtesting Platform
+  repo_name: trading_strat_backtester
+  project_short_description: Modular Python framework that allows you to design, test, and evaluate various trading strategies using historical financial data.
+  python_version: 3.12
+  version: 0.0.1
+  open_source_license: Not open source
