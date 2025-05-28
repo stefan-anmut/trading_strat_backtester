@@ -8,6 +8,7 @@ python_version = "3.12"
 
 [packages]
 pandas = "*"
+yfinance = "*"
 
 [dev-packages]
 bump2version = "*"
