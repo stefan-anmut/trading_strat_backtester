@@ -1,7 +1,7 @@
 """
 Quantitative Trading Strategy Backtesting Platform
 =========================================================
-This module contains the functionality for loading and saving data.
+This module contains the functionality for error handling.
 """
 
 from typing import Optional
@@ -16,6 +16,6 @@ class LoadSaveError(Exception):
 
     def __init__(self, message: Optional[str] = None) -> None:
         if not message:
-            message = "A data loading/saving error has occurred."
+            message = "A loading/saving error has occurred."
         self.message = message
         super().__init__(message)
