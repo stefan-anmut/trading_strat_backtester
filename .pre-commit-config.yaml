@@ -1,7 +1,7 @@
 # See https://pre-commit.com/ for usage and config
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
+  rev: v5.0.0
   hooks:
   - id: no-commit-to-branch
     name: Check not master branch
@@ -17,7 +17,7 @@ repos:
     exclude: docs/|setup.cfg
 
 - repo: https://github.com/PyCQA/docformatter
-  rev: v1.7.5
+  rev: v1.7.7
   hooks:
   - id: docformatter
 
@@ -28,7 +28,7 @@ repos:
       args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
 
 - repo: https://github.com/PyCQA/flake8
-  rev: 7.1.1
+  rev: 7.2.0
   hooks:
       - id: flake8
         types: [python]
@@ -48,18 +48,18 @@ repos:
         args: ['--ignore=E203,E266,E501,W503', '--max-line-length=88', '--max-complexity=18', '--select=B,C,E,F,W,T4']
 
 - repo: https://github.com/PyCQA/isort
-  rev: 5.13.2
+  rev: 6.0.1
   hooks:
       - id: isort
         args: ['--multi-line=3', '--trailing-comma', '--force-grid-wrap=0', '--use-parentheses', '--line-length=88']
 
 - repo: https://github.com/psf/black
-  rev: 24.8.0
+  rev: 25.1.0
   hooks:
       - id: black
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.11.2
+  rev: v1.15.0
   hooks:
       - id: mypy
         exclude: docs/|setup.py|tests/
@@ -80,8 +80,8 @@ repos:
   rev: v3.1.6
   hooks:
   - id: pipenv-setup-sync
-    stages: [push]
+    stages: [pre-push]
     args: ['--pipfile', '--process-dependency-links']
 
   - id: pipenv-setup-check
-    stages: [push]
+    stages: [pre-push]

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """The setup script."""
 
 from setuptools import find_packages, setup
@@ -28,7 +27,7 @@ setup(
     ],
     dependency_links=[],
     description="Modular Python framework that allows you to design, test, and evaluate various trading strategies using historical financial data.",
-    install_requires=[],
+    install_requires=["pandas", "yfinance"],
     long_description=readme + "\n\n" + history,
     include_package_data=True,
     keywords="trading_strat_backtester",
